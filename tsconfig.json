@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Phiên bản ECMAScript mục tiêu
+    "lib": ["dom", "dom.iterable", "esnext"], // Thư viện hỗ trợ
+    "allowJs": true, // Cho phép biên dịch file JavaScript
+    "skipLibCheck": true, // Bỏ qua kiểm tra thư viện
+    "esModuleInterop": true, // Hỗ trợ import/export ES modules
+    "allowSyntheticDefaultImports": true, // Cho phép import mặc định từ modules không có export mặc định
+    "strict": true, // Bật chế độ strict type-checking
+    "forceConsistentCasingInFileNames": true, // Đảm bảo tên file phân biệt hoa thường
+    "module": "esnext", // Hệ thống module mục tiêu
+    "moduleResolution": "node", // Cách thức phân giải module
+    "resolveJsonModule": true, // Cho phép import file JSON
+    "isolatedModules": true, // Đảm bảo mỗi file là một module độc lập
+    "noEmit": true, // Không tạo file output (dùng với Babel hoặc Webpack)
+    "jsx": "react-jsx" // Hỗ trợ JSX
+  },
+  "include": ["src/**/*"], // Bao gồm tất cả các file trong thư mục src
+  "exclude": ["node_modules", "build"] // Loại trừ thư mục node_modules và build
+}
