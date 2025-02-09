@@ -2,15 +2,15 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAfy1AVLiUNmmMVjzsCmD9OUEb5tTLAKFA",
-    authDomain: "crm-project-f0316.firebaseapp.com",
-    projectId: "crm-project-f0316",
-    storageBucket: "crm-project-f0316.firebasestorage.app",
-    messagingSenderId: "831503756601",
-    appId: "1:831503756601:web:1d6d3288e470c84b7f0ce8",
-    measurementId: "G-23548X4RTE"
-};
-
+    apiKey: "AIzaSyAziLS3RwDFvcf9UZq1fNHmO42UDrt7zak",
+    authDomain: "test-fe-e538a.firebaseapp.com",
+    projectId: "test-fe-e538a",
+    storageBucket: "test-fe-e538a.firebasestorage.app",
+    messagingSenderId: "166424982297",
+    appId: "1:166424982297:web:5e018bd405893105e88b88",
+    measurementId: "G-LN4V3GN55J"
+  };
+  
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
