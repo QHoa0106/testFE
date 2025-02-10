@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { FaEnvelope, FaCheckCircle } from "react-icons/fa";
+import TaskModal from "./TaskModal"; // Import TaskModal
 
 const parseDate = (dateStr: string) => {
   if (!dateStr) return new Date();
@@ -8,16 +9,18 @@ const parseDate = (dateStr: string) => {
   return new Date(year, month - 1, day);
 };
 
-const cellStyles = "px-3 py-1 rounded-md font-bold bg-gray-900 text-white";
-const headerStyles = "text-white font-semibold";
+const cellStyles = "px-3 py-2 rounded-md font-bold text-white";
+const headerStyles = "text-white font-semibold bg-[#1E293B]";
 
 const columns: GridColDef[] = [
   {
     field: "realised",
     headerName: "Réalisé",
-    width: 80,
+    minWidth: 80,
+    flex: 1,
     headerAlign: "center",
     align: "center",
+    headerClassName: headerStyles,
     renderCell: (params: GridRenderCellParams) =>
       params.value ? (
         <FaCheckCircle className="text-green-400 text-lg" />
@@ -28,21 +31,25 @@ const columns: GridColDef[] = [
   {
     field: "title",
     headerName: "Titre",
-    width: 200,
+    minWidth: 200,
+    flex: 2,
     headerAlign: "left",
     align: "left",
-    cellClassName: headerStyles,
+    headerClassName: headerStyles,
+    cellClassName: cellStyles,
   },
   {
     field: "dueDate",
     headerName: "Date d'échéance",
-    width: 200,
+    minWidth: 200,
+    flex: 2,
     headerAlign: "center",
     align: "center",
     type: "date",
+    headerClassName: headerStyles,
     valueGetter: (params: any) => parseDate(params.row?.dueDate),
     renderCell: (params: GridRenderCellParams<any, any>) => (
-      <span className={cellStyles}>
+      <span className={`px-3 py-1 rounded-md font-bold ${params.value?.getTime() < new Date().getTime() ? "bg-red-600" : "bg-gray-700"} text-white`}>
         {params.value?.toLocaleDateString("fr-FR")}
       </span>
     ),
@@ -50,9 +57,11 @@ const columns: GridColDef[] = [
   {
     field: "email",
     headerName: "Email",
-    width: 250,
+    minWidth: 250,
+    flex: 2,
     headerAlign: "center",
     align: "left",
+    headerClassName: headerStyles,
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <div className="flex items-center space-x-2">
         <FaEnvelope className="text-gray-400" />
@@ -63,18 +72,22 @@ const columns: GridColDef[] = [
   {
     field: "opportunity",
     headerName: "Opportunity",
-    width: 200,
+    minWidth: 200,
+    flex: 2,
     headerAlign: "center",
     align: "center",
+    headerClassName: headerStyles,
     cellClassName: "text-white",
   },
   {
     field: "status",
     headerName: "Statut",
-    width: 150,
+    minWidth: 150,
+    flex: 2,
     headerAlign: "center",
     align: "center",
     type: "singleSelect",
+    headerClassName: headerStyles,
     valueOptions: ["Appel", "À faire", "En attente"],
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <span
@@ -93,28 +106,34 @@ const columns: GridColDef[] = [
   {
     field: "contactAssocie",
     headerName: "Contact associé",
-    width: 200,
+    minWidth: 200,
+    flex: 2,
     headerAlign: "center",
     align: "center",
+    headerClassName: headerStyles,
     cellClassName: "text-white",
   },
   {
     field: "responsable",
     headerName: "Responsable",
-    width: 150,
+    minWidth: 150,
+    flex: 2,
     headerAlign: "center",
     align: "center",
+    headerClassName: headerStyles,
     cellClassName: "text-white",
   },
   {
     field: "creationDate",
     headerName: "Date de création",
-    width: 200,
+    minWidth: 200,
+    flex: 2,
     headerAlign: "center",
     align: "center",
+    headerClassName: headerStyles,
     valueGetter: (params: any) => parseDate(params.row?.creationDate),
     renderCell: (params: GridRenderCellParams<any, any>) => (
-      <span className={cellStyles}>
+      <span className="bg-gray-700 px-3 py-1 rounded-md text-white">
         {params.value?.toLocaleDateString("fr-FR")}
       </span>
     ),
@@ -149,8 +168,9 @@ const rows = [
 ];
 
 const TasksTable: React.FC = () => {
+  const [selectedTask, setSelectedTask] = useState<any | null>(null);
   return (
-    <div className="bg-[#111827] p-6 rounded-2xl shadow-lg border border-[#1E293B]">
+    <div className="bg-[#111827] p-6 rounded-2xl shadow-lg border border-[#1E293B] w-full overflow-x-auto">
       <DataGrid
         rows={rows}
         columns={columns}
@@ -161,33 +181,31 @@ const TasksTable: React.FC = () => {
           },
         }}
         checkboxSelection
+        onRowClick={(params) => setSelectedTask(params.row)} 
         sx={{
-          color: "white",
+          color: "gray",
           borderRadius: "12px",
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#1E293B",
-            color: "white !important",
             fontWeight: "bold",
             fontSize: "14px",
             textAlign: "center",
-            padding: "12px",
+            padding: "14px",
             borderBottom: "1px solid #374151",
           },
           "& .MuiDataGrid-cell": {
             color: "white",
             fontSize: "14px",
-            padding: "12px",
+            padding: "14px",
             borderBottom: "1px solid #374151",
           },
           "& .MuiDataGrid-root": {
             backgroundColor: "#1E293B",
             border: "none",
           },
-          "& .MuiTablePagination-root": {
-            color: "white",
-          },
           "& .MuiCheckbox-root": {
             color: "#FF6B00",
+            backgroundColor: "#1E293B",
           },
           "& .MuiSvgIcon-root": {
             color: "#FF6B00",
@@ -197,6 +215,7 @@ const TasksTable: React.FC = () => {
           },
         }}
       />
+      {selectedTask && <TaskModal task={selectedTask} onClose={() => setSelectedTask(null)} />}
     </div>
   );
 };
