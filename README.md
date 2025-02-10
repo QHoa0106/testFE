@@ -46,3 +46,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
