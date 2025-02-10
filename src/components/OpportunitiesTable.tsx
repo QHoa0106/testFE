@@ -13,8 +13,8 @@ const columns: GridColDef[] = [
     flex: 3,
     headerAlign: "left",
     align: "left",
-    headerClassName: headerStyles,
-    cellClassName: `${cellStyles} font-bold text-left`,
+    headerClassName: `${headerStyles} font-bold text-left `,
+    cellClassName: `${cellStyles}`,
   },
   {
     field: "phase",
@@ -23,8 +23,8 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
-    cellClassName: `${cellStyles} bg-[#2D3B50] rounded-md`,
+    headerClassName: `${headerStyles} font-bold text-left `,
+    cellClassName: `${cellStyles}`,
   },
   {
     field: "etiquette",
@@ -33,8 +33,8 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
-    cellClassName: `${cellStyles} bg-[#374151] rounded-md`,
+    headerClassName: `${headerStyles} font-bold text-left `,
+    cellClassName: `${cellStyles}`,
   },
   {
     field: "organisation",
@@ -43,7 +43,7 @@ const columns: GridColDef[] = [
     flex: 3,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <div className="flex items-center justify-center space-x-2">
         <FaBuilding className={iconStyles} />
@@ -58,7 +58,7 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <div className="flex items-center justify-center space-x-2">
         <FaUserTie className={iconStyles} />
@@ -73,7 +73,7 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     cellClassName: cellStyles,
   },
   {
@@ -83,7 +83,7 @@ const columns: GridColDef[] = [
     flex: 1,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <div className="flex items-center justify-center space-x-2">
         <FaEuroSign className="text-yellow-400" />
@@ -98,7 +98,7 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     cellClassName: cellStyles,
   },
 ];
@@ -142,7 +142,7 @@ const OpportunitiesTable: React.FC = () => {
         }}
         checkboxSelection
         sx={{
-          color: "white",
+          color: "red",
           borderRadius: "12px",
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "#1E293B",
@@ -164,6 +164,9 @@ const OpportunitiesTable: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+          },
+          "& .MuiDataGrid-columnHeaderDraggableContainer": {
+            backgroundColor: "#1E293B",
           },
           "& .MuiDataGrid-root": {
             backgroundColor: "#1E293B",

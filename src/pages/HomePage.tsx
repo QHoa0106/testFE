@@ -6,7 +6,6 @@ import {
   FaGlobe,
   FaCog,
   FaSearch,
-  FaAddressBook,
   FaUsers,
   FaTasks,
 } from "react-icons/fa";
@@ -14,7 +13,6 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Tab, Box } from "@mui/material";
 import AddButton from "../components/AddButton";
 
-import ContactsTable from "../components/ContactsTable";
 import OpportunitiesTable from "../components/OpportunitiesTable";
 import TasksTable from "../components/TasksTable";
 
@@ -41,18 +39,9 @@ export const HomePage: React.FC = () => {
                 className="flex justify-center md:justify-start flex-wrap"
               >
                 <Tab
-                  icon={<FaAddressBook />}
-                  label="Contacts"
-                  value="1"
-                  sx={{
-                    color: value === "1" ? "#FF6B00" : "#A0A0A0",
-                    "&.Mui-selected": { color: "#FF6B00" },
-                  }}
-                />
-                <Tab
                   icon={<FaUsers />}
                   label="Opportunités"
-                  value="3"
+                  value="1"
                   sx={{
                     color: value === "3" ? "#FF6B00" : "#A0A0A0",
                     "&.Mui-selected": { color: "#FF6B00" },
@@ -61,7 +50,7 @@ export const HomePage: React.FC = () => {
                 <Tab
                   icon={<FaTasks />}
                   label="Tâches"
-                  value="4"
+                  value="2"
                   sx={{
                     color: value === "4" ? "#FF6B00" : "#A0A0A0",
                     "&.Mui-selected": { color: "#FF6B00" },
@@ -76,19 +65,15 @@ export const HomePage: React.FC = () => {
             <AddButton
               label={
                 value === "1"
-                  ? "Ajout de contact"
-                  : value === "3"
-                  ? "Ajout d'opportunité"
+                   ? "Ajout d'opportunité"
                   : "Ajout de tâche"
               }
               onClick={() => alert("Ajout d'élément")}
             />
             <span className="text-lg font-medium">
               {value === "1"
-                ? "100 Contacts"
-                : value === "3"
-                ? "100 Opportunités"
-                : "50 Tâches"}
+                 ? "100 Opportunités"
+                 : "50 Tâches"}
             </span>
           </div>
           <div className="flex flex-wrap justify-center md:justify-end space-x-2 md:space-x-4 w-full md:w-auto">
@@ -116,12 +101,9 @@ export const HomePage: React.FC = () => {
         <div className="p-4 md:p-6 overflow-x-auto">
           <TabContext value={value}>
             <TabPanel value="1">
-              <ContactsTable />
-            </TabPanel>
-            <TabPanel value="3">
               <OpportunitiesTable />
             </TabPanel>
-            <TabPanel value="4">
+            <TabPanel value="2">
               <TasksTable />
             </TabPanel>
           </TabContext>

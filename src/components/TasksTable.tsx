@@ -9,8 +9,8 @@ const parseDate = (dateStr: string) => {
   return new Date(year, month - 1, day);
 };
 
-const cellStyles = "px-3 py-2 rounded-md font-bold text-white";
-const headerStyles = "text-white font-semibold bg-[#1E293B]";
+const cellStyles = "px-4 py-2 text-white text-center";
+const headerStyles = "text-gray-300 font-semibold bg-[#1E293B] py-3 text-center";
 
 const columns: GridColDef[] = [
   {
@@ -20,12 +20,12 @@ const columns: GridColDef[] = [
     flex: 1,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     renderCell: (params: GridRenderCellParams) =>
       params.value ? (
-        <FaCheckCircle className="text-green-400 text-lg" />
+        <FaCheckCircle className="text-green-400 text-lg text-center" />
       ) : (
-        <FaCheckCircle className="text-gray-500 text-lg" />
+        <FaCheckCircle className="text-gray-500 text-lg text-center" />
       ),
   },
   {
@@ -35,8 +35,8 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "left",
     align: "left",
-    headerClassName: headerStyles,
-    cellClassName: cellStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
+    cellClassName: `${cellStyles}`
   },
   {
     field: "dueDate",
@@ -46,7 +46,7 @@ const columns: GridColDef[] = [
     headerAlign: "center",
     align: "center",
     type: "date",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     valueGetter: (params: any) => parseDate(params.row?.dueDate),
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <span className={`px-3 py-1 rounded-md font-bold ${params.value?.getTime() < new Date().getTime() ? "bg-red-600" : "bg-gray-700"} text-white`}>
@@ -61,11 +61,11 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "left",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <div className="flex items-center space-x-2">
         <FaEnvelope className="text-gray-400" />
-        <span className="text-white">{params.value}</span>
+        <span className="text-white ">{params.value}</span>
       </div>
     ),
   },
@@ -76,8 +76,8 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
-    cellClassName: "text-white",
+    headerClassName: `${headerStyles} font-bold text-left `,
+    cellClassName: `${cellStyles}`,
   },
   {
     field: "status",
@@ -87,18 +87,10 @@ const columns: GridColDef[] = [
     headerAlign: "center",
     align: "center",
     type: "singleSelect",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     valueOptions: ["Appel", "À faire", "En attente"],
     renderCell: (params: GridRenderCellParams<any, any>) => (
-      <span
-        className={`px-3 py-1 rounded-md font-bold ${
-          params.value === "Appel"
-            ? "bg-pink-700 text-white"
-            : params.value === "À faire"
-            ? "bg-yellow-500 text-black"
-            : "bg-gray-500 text-white"
-        }`}
-      >
+      <span className={`px-3 py-1 rounded-md font-bold ${params.value === "Appel" ? "bg-pink-700 text-white" : params.value === "À faire" ? "bg-yellow-500 text-black" : "bg-gray-500 text-white"}`}>
         {params.value}
       </span>
     ),
@@ -110,8 +102,8 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
-    cellClassName: "text-white",
+    headerClassName: `${headerStyles} font-bold text-left `,
+    cellClassName: `${cellStyles}`,
   },
   {
     field: "responsable",
@@ -120,8 +112,8 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
-    cellClassName: "text-white",
+    headerClassName: `${headerStyles} font-bold text-left `,
+    cellClassName: `${cellStyles}`,
   },
   {
     field: "creationDate",
@@ -130,7 +122,7 @@ const columns: GridColDef[] = [
     flex: 2,
     headerAlign: "center",
     align: "center",
-    headerClassName: headerStyles,
+    headerClassName: `${headerStyles} font-bold text-left `,
     valueGetter: (params: any) => parseDate(params.row?.creationDate),
     renderCell: (params: GridRenderCellParams<any, any>) => (
       <span className="bg-gray-700 px-3 py-1 rounded-md text-white">
@@ -189,7 +181,6 @@ const TasksTable: React.FC = () => {
             backgroundColor: "#1E293B",
             fontWeight: "bold",
             fontSize: "14px",
-            textAlign: "center",
             padding: "14px",
             borderBottom: "1px solid #374151",
           },
@@ -198,20 +189,28 @@ const TasksTable: React.FC = () => {
             fontSize: "14px",
             padding: "14px",
             borderBottom: "1px solid #374151",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           },
           "& .MuiDataGrid-root": {
             backgroundColor: "#1E293B",
             border: "none",
           },
-          "& .MuiCheckbox-root": {
-            color: "#FF6B00",
+          "& .MuiDataGrid-columnHeaderDraggableContainer": {
             backgroundColor: "#1E293B",
           },
-          "& .MuiSvgIcon-root": {
+          "& .MuiCheckbox-root": {
             color: "#FF6B00",
           },
           "& .MuiDataGrid-row:hover": {
             backgroundColor: "#2D3B50",
+          },
+          "& .MuiSvgIcon-root": {
+            color: "#FF6B00",
+          },
+          "& .MuiTablePagination-root": {
+            color: "white",
           },
         }}
       />
